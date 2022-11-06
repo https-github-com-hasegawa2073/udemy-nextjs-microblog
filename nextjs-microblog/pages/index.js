@@ -4,8 +4,19 @@ import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import utilStyles from "../styles/utils.module.css";
+import { getPostsData } from "../lib/post";
 
-export default function Home() {
+export async function getStaticProps() {
+  const allPostData = getPostsData();
+  console.log(allPostData);
+  return {
+    props: {
+      allPostData,
+    },
+  };
+}
+
+export default function Home({ allPostData }) {
   return (
     <Layout>
       <section className={utilStyles.headingMd}>
